@@ -1,3 +1,6 @@
+.idea
+config/config.yml
+
 # Binaries for programs and plugins
 *.exe
 *.exe~

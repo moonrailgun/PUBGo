@@ -1,0 +1,6 @@
+db:
+  name: 'pubgo'
+  user: 'root'
+  pass: ''
+pubg:
+  api: ''
