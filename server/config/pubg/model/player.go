@@ -1,6 +1,7 @@
 package model
 
 import (
+	"bytes"
 	"errors"
 	"github.com/slemgrim/jsonapi"
 	"io"
@@ -40,4 +41,13 @@ func ParsePlayers(in io.Reader) ([]*Player, error) {
 		players[idx] = player
 	}
 	return players, nil
+}
+
+func StringifyPlayer(player *Player) (string, error) {
+	var s bytes.Buffer
+	err := jsonapi.MarshalPayload(&s, player); if err != nil {
+		return "", err
+	}
+
+	return s.String(), nil
 }
