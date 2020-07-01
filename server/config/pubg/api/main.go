@@ -4,9 +4,10 @@ import (
 	"bytes"
 	"compress/gzip"
 	"fmt"
-	"github.com/sirupsen/logrus"
 	"io"
 	"net/http"
+
+	"github.com/sirupsen/logrus"
 )
 
 type API struct {
@@ -15,12 +16,13 @@ type API struct {
 }
 
 type ShardType string
+
 const (
-	STEAM ShardType="steam"
-	KAKAO ShardType="kakao"
-	PSN ShardType="psn"
-	STADIA ShardType="stadia"
-	XBOX ShardType="xbox"
+	STEAM  ShardType = "steam"
+	KAKAO  ShardType = "kakao"
+	PSN    ShardType = "psn"
+	STADIA ShardType = "stadia"
+	XBOX   ShardType = "xbox"
 )
 
 func NewAPI(key string) *API {
@@ -29,7 +31,6 @@ func NewAPI(key string) *API {
 		Url: "https://api.playbattlegrounds.com",
 	}
 }
-
 
 // http 请求
 func httpRequest(url, key string) (*bytes.Buffer, error) {
@@ -48,22 +49,19 @@ func httpRequest(url, key string) (*bytes.Buffer, error) {
 
 	// Execute request
 	client := &http.Client{}
-	response, err := client.Do(req);
+	response, err := client.Do(req)
 	if err != nil {
 		return nil, err
 	}
 
 	// Check http response code
 	if response.StatusCode != 200 {
-		err := response.Body.Close();
+		err := response.Body.Close()
 		if err != nil {
 			return nil, err
 		}
 		return nil, fmt.Errorf("HTTP request failed: %s", response.Status)
 	}
-
-	// https://api.playbattlegrounds.com/shards/pc-eu?filter[playerNames]=dreuhdreuh
-	// https://api.playbattlegrounds.com/shards/pc-eu/players?filter[playerNames]=dreuhdreuh
 
 	// Retrieve response body
 	var reader io.ReadCloser
