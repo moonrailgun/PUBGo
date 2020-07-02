@@ -13,12 +13,9 @@ func (a *API) RequestSinglePlayerByName(shard ShardType, playerName string) (*mo
 
 	endpointUrl := fmt.Sprintf("%s/shards/%s/players?%s", a.Url, shard, parameters.Encode())
 
-	buffer, err := httpRequest(endpointUrl, a.Key)
-	if err != nil {
+	buffer, err := httpRequest(endpointUrl, a.Key); if err != nil {
 		return nil, err
 	}
-
-	// fmt.Printf("data:\n%s\n", buffer)
 
 	players, err:= model.ParsePlayers(buffer.String()); if err != nil {
 		return nil, err

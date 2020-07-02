@@ -18,8 +18,10 @@ func init() {
 	DB, err = gorm.Open("mysql", fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?parseTime=True&loc=Local", dbConfig.User, dbConfig.Password, dbConfig.Host, dbConfig.Port, dbConfig.Name)); if err != nil {
 		panic(err)
 	}
-
+	DB.SingularTable(true)
 	if os.Getenv("DEBUG") != "" {
 		DB.LogMode(true)
 	}
+
+	runMigrate(DB) // 执行迁移
 }
