@@ -3,7 +3,6 @@ package model
 import (
 	"bytes"
 	"errors"
-	"io"
 	"reflect"
 	"time"
 
@@ -24,12 +23,12 @@ type Player struct {
 // Match structure represent data related to a PUBG match
 type MatchSummary struct {
 	ID     string `jsonapi:"primary,match"`
-	GameID string `jsonapi:"attr,id"`
+	// GameID string `jsonapi:"attr,id"`
 }
 
-func ParsePlayers(in io.Reader) ([]*Player, error) {
-	result, err := jsonapi.UnmarshalManyPayload(in, reflect.TypeOf(new(Player)))
-	if err != nil {
+func ParsePlayers(jsonStr string) ([]*Player, error) {
+	in := bytes.NewReader([]byte(jsonStr))
+	result, err := jsonapi.UnmarshalManyPayload(in, reflect.TypeOf(new(Player))); if err != nil {
 		return nil, err
 	}
 

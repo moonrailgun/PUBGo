@@ -1,6 +1,9 @@
 package model
 
-import ("fmt")
+import (
+	"github.com/stretchr/testify/assert"
+	"testing"
+)
 
 var testPlayerStr = `
 {
@@ -966,8 +969,16 @@ var testPlayerStr = `
   "meta": {}
 }
 `
-func TestPlayerParse(t *testing.T) {
-	player := ParsePlayers(testPlayerStr)
+func TestParsePlayer(t *testing.T) {
+	players, err := ParsePlayers(testPlayerStr); if err != nil {
+		t.Fatal(err)
+	}
 
-	fmt.Printf("%+v", player)
+	assert.Len(t, players, 1)
+	assert.Equal(t, "account.c0e530e9b7244b358def282782f893af", players[0].ID)
+	assert.Equal(t, "WackyJacky101", players[0].Name)
+	assert.Equal(t, "steam", players[0].ShardID)
+	assert.Equal(t, "bluehole-pubg", players[0].TitleID)
+	assert.Equal(t, "4b1ea7d9-b512-482b-a025-ae6ee5403c64", players[0].Matches[0].ID)
+	assert.Equal(t, "2020-07-01 14:38:28 +0000 UTC", players[0].CreatedAt.String())
 }

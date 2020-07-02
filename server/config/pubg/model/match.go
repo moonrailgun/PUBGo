@@ -1,6 +1,10 @@
 package model
 
-import "time"
+import (
+	"bytes"
+	"github.com/slemgrim/jsonapi"
+	"time"
+)
 
 type Match struct {
 	ID           string    `jsonapi:"primary,match"`
@@ -59,4 +63,14 @@ type Participant struct {
 		WinPoints       int     `json:"winPoints"`
 		WinPointsDelta  float64 `json:"winPointsDelta"`
 	} `jsonapi:"attr,stats"`
+}
+
+func ParseMatch(jsonStr string) (*Match, error) {
+	in := bytes.NewReader([]byte(jsonStr))
+	match := new(Match)
+	err := jsonapi.UnmarshalPayload(in, match); if err != nil {
+		return nil, err
+	}
+
+	return match, nil
 }

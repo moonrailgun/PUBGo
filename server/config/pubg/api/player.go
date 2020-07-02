@@ -18,9 +18,9 @@ func (a *API) RequestSinglePlayerByName(shard ShardType, playerName string) (*mo
 		return nil, err
 	}
 
-	//fmt.Printf("data:\n%s\n", buffer)
+	// fmt.Printf("data:\n%s\n", buffer)
 
-	players, err:= model.ParsePlayers(buffer); if err != nil {
+	players, err:= model.ParsePlayers(buffer.String()); if err != nil {
 		return nil, err
 	}
 
