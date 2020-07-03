@@ -2,7 +2,7 @@ package model
 
 import (
 	"bytes"
-	"github.com/slemgrim/jsonapi"
+	"github.com/google/jsonapi"
 	"time"
 )
 

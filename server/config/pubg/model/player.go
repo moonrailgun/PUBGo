@@ -6,7 +6,7 @@ import (
 	"reflect"
 	"time"
 
-	"github.com/slemgrim/jsonapi"
+	"github.com/google/jsonapi"
 )
 
 type Player struct {
