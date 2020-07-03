@@ -1509,7 +1509,8 @@ var testMatchStr = `
 `
 
 func TestParseMatch(t *testing.T) {
-	match, err := ParseMatch(testMatchStr); if err != nil {
+	match, err := ParseMatch(testMatchStr)
+	if err != nil {
 		t.Fatal(err)
 	}
 

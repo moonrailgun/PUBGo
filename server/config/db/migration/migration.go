@@ -1,4 +1,4 @@
-package db
+package migration
 
 import (
 	"github.com/jinzhu/gorm"
@@ -6,6 +6,6 @@ import (
 )
 
 // 执行迁移
-func runMigrate(db *gorm.DB) {
-	db.AutoMigrate(&models.ModelPlayer{}, &models.ModelPlayer{})
+func RunMigrate(db *gorm.DB) {
+	db.AutoMigrate(&models.ModelPlayer{}, &models.ModelMatch{})
 }

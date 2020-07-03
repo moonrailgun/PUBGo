@@ -5,23 +5,29 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/moonrailgun/PUBGo/server/config"
+	"github.com/moonrailgun/PUBGo/server/config/db/migration"
 	"os"
 )
 
 // DB Global DB connection
-var DB *gorm.DB
+var db *gorm.DB
 
 func init() {
 	var err error
 
 	dbConfig := config.Config.DB
-	DB, err = gorm.Open("mysql", fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?parseTime=True&loc=Local", dbConfig.User, dbConfig.Password, dbConfig.Host, dbConfig.Port, dbConfig.Name)); if err != nil {
+	db, err = gorm.Open("mysql", fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?parseTime=True&loc=Local", dbConfig.User, dbConfig.Pass, dbConfig.Host, dbConfig.Port, dbConfig.Name))
+	if err != nil {
 		panic(err)
 	}
-	DB.SingularTable(true)
+	db.SingularTable(true)
 	if os.Getenv("DEBUG") != "" {
-		DB.LogMode(true)
+		db.LogMode(true)
 	}
 
-	runMigrate(DB) // 执行迁移
+	migration.RunMigrate(db) // 执行迁移
+}
+
+func GetDb() *gorm.DB {
+	return db
 }

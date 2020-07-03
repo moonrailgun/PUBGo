@@ -969,8 +969,10 @@ var testPlayerStr = `
   "meta": {}
 }
 `
+
 func TestParsePlayer(t *testing.T) {
-	players, err := ParsePlayers(testPlayerStr); if err != nil {
+	players, err := ParsePlayers(testPlayerStr)
+	if err != nil {
 		t.Fatal(err)
 	}
 

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	_ "github.com/moonrailgun/PUBGo/server/config/db"
 	"github.com/moonrailgun/PUBGo/server/routes"
 )
 
