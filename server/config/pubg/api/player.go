@@ -2,11 +2,11 @@ package api
 
 import (
 	"fmt"
-	"github.com/moonrailgun/PUBGo/server/config/pubg/model"
+	"github.com/moonrailgun/PUBGo/server/config/pubg/schema"
 	"net/url"
 )
 
-func (a *API) RequestSinglePlayerByName(shard ShardType, playerName string) (*model.Player, error) {
+func (a *API) RequestSinglePlayerByName(shard ShardType, playerName string) (*schema.Player, error) {
 	parameters := url.Values{
 		"filter[playerNames]": {playerName},
 	}
@@ -17,7 +17,7 @@ func (a *API) RequestSinglePlayerByName(shard ShardType, playerName string) (*mo
 		return nil, err
 	}
 
-	players, err:= model.ParsePlayers(buffer.String()); if err != nil {
+	players, err:= schema.ParsePlayers(buffer.String()); if err != nil {
 		return nil, err
 	}
 

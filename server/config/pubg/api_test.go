@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/moonrailgun/PUBGo/server/config/pubg/api"
-	"github.com/moonrailgun/PUBGo/server/config/pubg/model"
+	"github.com/moonrailgun/PUBGo/server/config/pubg/schema"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -17,7 +17,7 @@ func TestRequestSinglePlayerByName(t *testing.T) {
 
 	assert.Equal(t, player.Name, playerName)
 
-	json, err := model.StringifyPlayer(player); if err != nil {
+	json, err := schema.StringifyPlayer(player); if err != nil {
 		t.Fatal(err)
 	}
 	fmt.Println(json)

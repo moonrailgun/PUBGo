@@ -2,7 +2,7 @@ package models
 
 import (
 	"github.com/jinzhu/gorm"
-	"github.com/moonrailgun/PUBGo/server/config/pubg/model"
+	"github.com/moonrailgun/PUBGo/server/config/pubg/schema"
 	"time"
 )
 
@@ -15,7 +15,7 @@ type ModelPlayer struct {
 	AccountUpdatedAt time.Time
 }
 
-func (m *ModelPlayer) ParseFromPUBG(data model.Player) {
+func (m *ModelPlayer) ParseFromPUBG(data schema.Player) {
 	m.AccountId = data.ID
 	m.Name = data.Name
 	m.ShardID = data.ShardID

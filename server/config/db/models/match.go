@@ -3,7 +3,7 @@ package models
 import (
 	"encoding/json"
 	"github.com/jinzhu/gorm"
-	"github.com/moonrailgun/PUBGo/server/config/pubg/model"
+	"github.com/moonrailgun/PUBGo/server/config/pubg/schema"
 	"time"
 )
 
@@ -15,7 +15,7 @@ type ModelMatch struct {
 	Roster         string `gorm:"type:blob"`
 }
 
-func (m *ModelMatch) ParseFromPUBG(data model.Match) {
+func (m *ModelMatch) ParseFromPUBG(data schema.Match) {
 	m.MatchId = data.ID
 	m.Duration = data.Duration
 	m.MatchCreatedAt = data.CreatedAt
