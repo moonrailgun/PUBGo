@@ -2,16 +2,15 @@ import React, { useCallback, useState } from 'react';
 import { Button, Select, MenuItem, Input } from '@material-ui/core';
 import { fetchPlayerInfo } from '../helper/player';
 import type { PubgShard } from '../types/pubg';
+import { useAsyncFn } from 'react-use';
 
 export const MainRoute: React.FC = React.memo(() => {
   const [shard, setShard] = useState<PubgShard>('steam');
   const [username, setUsername] = useState('');
 
-  const [res, setRes] = useState('');
-
-  const handleClick = useCallback(() => {
-    fetchPlayerInfo(shard, username).then((data) => setRes(data));
-  }, [shard, username, setRes]);
+  const [state, fetch] = useAsyncFn(() => {
+    return fetchPlayerInfo(shard, username);
+  }, [shard, username]);
 
   return (
     <div>
@@ -31,12 +30,13 @@ export const MainRoute: React.FC = React.memo(() => {
         variant="contained"
         color="primary"
         disableElevation={true}
-        onClick={handleClick}
+        disabled={state.loading}
+        onClick={fetch}
       >
         发送请求
       </Button>
 
-      <div>{JSON.stringify(res)}</div>
+      <div>{JSON.stringify(state.value)}</div>
     </div>
   );
 });
