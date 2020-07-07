@@ -18,7 +18,7 @@ func TestGetMatchInfo(t *testing.T) {
 	// 检查内存
 	assert.False(t, db.GetDb().NewRecord(match)) // 判断已经被写入
 	assert.Equal(t, testMatchId, match.MatchId)
-	assert.Greater(t, match.ID, 0)
+	assert.Greater(t, match.ID, uint(0))
 
 	// 检查是否已经写入数据库
 	dbMatch := new(ModelMatch)
