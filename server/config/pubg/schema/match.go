@@ -6,6 +6,12 @@ import (
 	"time"
 )
 
+// Match structure represent data related to a PUBG match
+type MatchSummary struct {
+	ID string `jsonapi:"primary,match"`
+	// GameID string `jsonapi:"attr,id"`
+}
+
 type Match struct {
 	ID           string    `jsonapi:"primary,match"`
 	CreatedAt    time.Time `jsonapi:"attr,createdAt,iso8601"`
@@ -68,7 +74,8 @@ type Participant struct {
 func ParseMatch(jsonStr string) (*Match, error) {
 	in := bytes.NewReader([]byte(jsonStr))
 	match := new(Match)
-	err := jsonapi.UnmarshalPayload(in, match); if err != nil {
+	err := jsonapi.UnmarshalPayload(in, match);
+	if err != nil {
 		return nil, err
 	}
 

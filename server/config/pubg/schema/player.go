@@ -20,12 +20,6 @@ type Player struct {
 	Matches      []*MatchSummary `jsonapi:"relation,matches"`
 }
 
-// Match structure represent data related to a PUBG match
-type MatchSummary struct {
-	ID     string `jsonapi:"primary,match"`
-	// GameID string `jsonapi:"attr,id"`
-}
-
 func ParsePlayers(jsonStr string) ([]*Player, error) {
 	in := bytes.NewReader([]byte(jsonStr))
 	result, err := jsonapi.UnmarshalManyPayload(in, reflect.TypeOf(new(Player))); if err != nil {
