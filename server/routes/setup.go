@@ -3,20 +3,20 @@ package routes
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/moonrailgun/PUBGo/server/routes/controllers"
-	stats "github.com/semihalev/gin-stats"
+	ginStats "github.com/semihalev/gin-stats"
 	"net/http"
 )
 
 func SetupRouter() *gin.Engine {
 	r := gin.Default()
-	r.Use(stats.RequestStats())
+	r.Use(ginStats.RequestStats())
 
 	r.GET("/ping", func(c *gin.Context) {
 		c.String(http.StatusOK, "pong")
 	})
 
 	r.GET("/stats", func(c *gin.Context) {
-		c.JSON(http.StatusOK, stats.Report())
+		c.JSON(http.StatusOK, ginStats.Report())
 	})
 
 	player := new(controllers.PlayerController)
@@ -24,6 +24,9 @@ func SetupRouter() *gin.Engine {
 
 	match := new(controllers.MatchController)
 	r.GET("/match/shard/:shard/match/:matchId", match.GetMatchInfo)
+
+	stats := new(controllers.StatsController)
+	r.GET("/stats/shard/:shard/name/:username", stats.GetLifeTimeStats)
 
 	return r
 }

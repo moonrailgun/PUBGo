@@ -20,9 +20,14 @@ type Player struct {
 	Matches      []*MatchSummary `jsonapi:"relation,matches"`
 }
 
+type PlayerSummary struct {
+	ID string `jsonapi:"primary,player"`
+}
+
 func ParsePlayers(jsonStr string) ([]*Player, error) {
 	in := bytes.NewReader([]byte(jsonStr))
-	result, err := jsonapi.UnmarshalManyPayload(in, reflect.TypeOf(new(Player))); if err != nil {
+	result, err := jsonapi.UnmarshalManyPayload(in, reflect.TypeOf(new(Player)))
+	if err != nil {
 		return nil, err
 	}
 

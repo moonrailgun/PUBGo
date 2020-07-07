@@ -6,8 +6,15 @@ import (
 )
 
 type LifeTimeStats struct {
-	GameModeStats *GameModeStats `jsonapi:"attr,gameModeStats"`
-	BestRankPoint int            `jsonapi:"attr,bestRankPoint"`
+	Player          *PlayerSummary  `jsonapi:"relation,player"`
+	GameModeStats   *GameModeStats  `jsonapi:"attr,gameModeStats"`
+	BestRankPoint   int             `jsonapi:"attr,bestRankPoint"`
+	MatchesSolo     []*MatchSummary `jsonapi:"relation,matchesSolo"`
+	MatchesSoloFPP  []*MatchSummary `jsonapi:"relation,matchesSoloFPP"`
+	MatchesDuo      []*MatchSummary `jsonapi:"relation,matchesDuo"`
+	MatchesDuoFPP   []*MatchSummary `jsonapi:"relation,matchesDuoFPP"`
+	MatchesSquad    []*MatchSummary `jsonapi:"relation,matchesSquad"`
+	MatchesSquadFPP []*MatchSummary `jsonapi:"relation,matchesSquadFPP"`
 }
 
 type GameModeStats struct {

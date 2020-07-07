@@ -1,7 +1,7 @@
 package schema
 
 import (
-	"fmt"
+	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
@@ -379,5 +379,8 @@ func TestParseParseLifeTimeStats(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	fmt.Printf("%+v", stats)
+	assert.Equal(t, 14, stats.GameModeStats.SquadFpp.Assists)
+	assert.Equal(t, 24, stats.GameModeStats.SquadFpp.Boosts)
+	assert.Greater(t, len(stats.MatchesSquad), 0)
+	assert.Equal(t, "af48c404-08e1-4822-a2e9-fa1a4fbb3980", stats.MatchesSquad[0].ID)
 }

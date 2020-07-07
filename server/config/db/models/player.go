@@ -37,7 +37,7 @@ func (m *ModelPlayer) GetInfoByUserName(shard api.ShardType, username string) er
 			return err
 		}
 		m.ParseFromPUBG(*remotePlayer)
-		db.GetDb().Create(m)
+		db.GetDb().Where("account_id = ?", m.AccountId).FirstOrCreate(m) // 存在的话就不创建了
 	}
 
 	return nil
