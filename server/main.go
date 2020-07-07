@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	_ "github.com/moonrailgun/PUBGo/server/config/db"
+	_ "github.com/moonrailgun/PUBGo/server/config/db/migration"
 	"github.com/moonrailgun/PUBGo/server/routes"
 )
 

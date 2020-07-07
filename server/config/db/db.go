@@ -5,7 +5,6 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/moonrailgun/PUBGo/server/config"
-	"github.com/moonrailgun/PUBGo/server/config/db/migration"
 	"os"
 )
 
@@ -24,8 +23,6 @@ func init() {
 	if os.Getenv("DEBUG") != "" {
 		db.LogMode(true)
 	}
-
-	migration.RunMigrate(db) // 执行迁移
 }
 
 func GetDb() *gorm.DB {
