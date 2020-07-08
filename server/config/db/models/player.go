@@ -12,7 +12,7 @@ type ModelPlayer struct {
 	BaseModel
 	AccountId        string `gorm:"not null;unique_index:index_account"`
 	Name             string `gorm:"not null;unique_index:index_account"`
-	ShardID          string
+	ShardId          string
 	AccountCreatedAt time.Time
 	AccountUpdatedAt time.Time
 }
@@ -20,7 +20,7 @@ type ModelPlayer struct {
 func (m *ModelPlayer) ParseFromPUBG(data schema.Player) {
 	m.AccountId = data.ID
 	m.Name = data.Name
-	m.ShardID = data.ShardID
+	m.ShardId = data.ShardId
 	m.AccountCreatedAt = data.CreatedAt
 	m.AccountUpdatedAt = data.UpdatedAt
 }

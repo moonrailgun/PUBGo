@@ -8,24 +8,24 @@ import (
 
 // Match structure represent data related to a PUBG match
 type MatchSummary struct {
-	ID string `jsonapi:"primary,match"`
+	ID string `jsonapi:"primary,match" json:"id"`
 	// GameID string `jsonapi:"attr,id"`
 }
 
 type Match struct {
-	ID           string    `jsonapi:"primary,match"`
+	ID           string    `jsonapi:"primary,match" json:"id"`
 	CreatedAt    time.Time `jsonapi:"attr,createdAt,iso8601"`
 	Duration     int       `jsonapi:"attr,duration"`
 	GameMode     string    `jsonapi:"attr,gameMode"`
 	PatchVersion string    `jsonapi:"attr,patchVersion"`
-	ShardID      string    `jsonapi:"attr,shardId"`
-	TitleID      string    `jsonapi:"attr,titleId"`
+	ShardId      string    `jsonapi:"attr,shardId"`
+	TitleId      string    `jsonapi:"attr,titleId"`
 	Rosters      []*Roster `jsonapi:"relation,rosters"`
 }
 
 type Roster struct {
-	ID      string `jsonapi:"primary,roster"`
-	ShardID string `jsonapi:"attr,shardId"`
+	ID      string `jsonapi:"primary,roster" json:"id"`
+	ShardId string `jsonapi:"attr,shardId"`
 	Stats   struct {
 		Rank   int `json:"rank"`
 		TeamID int `json:"teamId"`
@@ -35,9 +35,9 @@ type Roster struct {
 }
 
 type Participant struct {
-	ID      string `jsonapi:"primary,participant"`
+	ID      string `jsonapi:"primary,participant" json:"id"`
 	Actor   string `jsonapi:"attr,actor"`
-	ShardID string `jsonapi:"attr,shardId"`
+	ShardId string `jsonapi:"attr,shardId"`
 	Stats   struct {
 		DBNOs           int     `json:"DBNOs"`
 		Assists         int     `json:"assists"`
@@ -74,7 +74,7 @@ type Participant struct {
 func ParseMatch(jsonStr string) (*Match, error) {
 	in := bytes.NewReader([]byte(jsonStr))
 	match := new(Match)
-	err := jsonapi.UnmarshalPayload(in, match);
+	err := jsonapi.UnmarshalPayload(in, match)
 	if err != nil {
 		return nil, err
 	}

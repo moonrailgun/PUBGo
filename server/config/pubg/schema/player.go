@@ -10,13 +10,13 @@ import (
 )
 
 type Player struct {
-	ID           string          `jsonapi:"primary,player"`
+	ID           string          `jsonapi:"primary,player" json:"id"`
 	Name         string          `jsonapi:"attr,name"`
-	ShardID      string          `jsonapi:"attr,shardId"`
+	ShardId      string          `jsonapi:"attr,shardId"`
 	CreatedAt    time.Time       `jsonapi:"attr,createdAt,iso8601"`
 	UpdatedAt    time.Time       `jsonapi:"attr,updatedAt,iso8601"`
 	PatchVersion string          `jsonapi:"attr,patchVersion"`
-	TitleID      string          `jsonapi:"attr,titleId"`
+	TitleId      string          `jsonapi:"attr,titleId"`
 	Matches      []*MatchSummary `jsonapi:"relation,matches"`
 }
 

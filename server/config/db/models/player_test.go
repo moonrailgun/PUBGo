@@ -19,7 +19,7 @@ func TestPlayerGetInfoByUserName(t *testing.T) {
 	// 检查内存
 	assert.Equal(t, testPlayerName, player.Name)
 	assert.Equal(t, "account.c0e530e9b7244b358def282782f893af", player.AccountId)
-	assert.Equal(t, "steam", player.ShardID)
+	assert.Equal(t, "steam", player.ShardId)
 
 	// 检查是否已经写入数据库
 	dbPlayer := new(ModelPlayer)
