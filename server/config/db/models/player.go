@@ -29,7 +29,7 @@ func (m *ModelPlayer) ParseFromPUBG(data schema.Player) {
 // 根据用户名获取用户信息
 // 优先从数据库中获取
 func (m *ModelPlayer) GetInfoByUserName(shard api.ShardType, username string) error {
-	err := db.GetDb().Where("shard_id = ? and name = ?", shard, username).First(m)
+	err := db.GetDb().Where("shard_id = ? and name = ?", shard, username).First(m).Error
 	if err != nil {
 		// 	数据库没有数据，发请求获取
 		remotePlayer, err := pubg.Api.RequestSinglePlayerByName(shard, username)

@@ -34,7 +34,7 @@ func (m *ModelLifeTimeStats) ParseFromPUBG(data schema.LifeTimeStats) {
 
 func (m *ModelLifeTimeStats) GetInfoByAccountId(shard api.ShardType, accountId string) error {
 	// 如果上次数据库更新时间在5分钟内 则直接返回数据库中的数据
-	err := db.GetDb().Where("account_id = ? and TIME_TO_SEC(TIMEDIFF(now(), updated_at)) < 60 * 5", accountId).First(m)
+	err := db.GetDb().Where("account_id = ? and TIME_TO_SEC(TIMEDIFF(now(), updated_at)) < 60 * 5", accountId).First(m).Error
 	if err != nil {
 		// 	如果数据库中没有数据的话 发送请求
 		remoteStats, err := pubg.Api.RequestLifeTimeStats(shard, accountId)
