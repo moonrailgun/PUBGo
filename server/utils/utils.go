@@ -1,8 +1,10 @@
 package utils
 
-import "encoding/json"
+import (
+	jsoniter "github.com/json-iterator/go"
+)
 
 func QuickMarshal(jsonData interface{}) string {
-	str, _ := json.Marshal(jsonData)
+	str, _ := jsoniter.Marshal(jsonData)
 	return string(str[:])
 }

@@ -1,7 +1,6 @@
 package models
 
 import (
-	"github.com/jinzhu/gorm"
 	"github.com/moonrailgun/PUBGo/server/config/db"
 	"github.com/moonrailgun/PUBGo/server/config/pubg"
 	"github.com/moonrailgun/PUBGo/server/config/pubg/api"
@@ -10,7 +9,7 @@ import (
 )
 
 type ModelPlayer struct {
-	gorm.Model
+	BaseModel
 	AccountId        string `gorm:"not null;unique_index:index_account"`
 	Name             string `gorm:"not null;unique_index:index_account"`
 	ShardID          string

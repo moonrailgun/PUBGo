@@ -1,17 +1,16 @@
 package models
 
 import (
-	"encoding/json"
-	"github.com/jinzhu/gorm"
 	"github.com/moonrailgun/PUBGo/server/config/db"
 	"github.com/moonrailgun/PUBGo/server/config/pubg"
 	"github.com/moonrailgun/PUBGo/server/config/pubg/api"
 	"github.com/moonrailgun/PUBGo/server/config/pubg/schema"
+	"github.com/moonrailgun/PUBGo/server/utils"
 	"time"
 )
 
 type ModelMatch struct {
-	gorm.Model
+	BaseModel
 	MatchId        string `gorm:"not null;unique_index"`
 	Duration       int
 	MatchCreatedAt time.Time
@@ -23,8 +22,7 @@ func (m *ModelMatch) ParseFromPUBG(data schema.Match) {
 	m.Duration = data.Duration
 	m.MatchCreatedAt = data.CreatedAt
 
-	roster, _ := json.Marshal(data.Rosters)
-	m.Roster = string(roster[:])
+	m.Roster = utils.QuickMarshal(data.Rosters)
 }
 
 // 获取比赛详情

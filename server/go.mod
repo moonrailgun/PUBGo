@@ -9,7 +9,7 @@ require (
 	github.com/google/jsonapi v0.0.0-20200226002910-c8283f632fb7
 	github.com/jinzhu/configor v1.2.0
 	github.com/jinzhu/gorm v1.9.14
-	github.com/json-iterator/go v1.1.10 // indirect
+	github.com/json-iterator/go v1.1.10
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.1 // indirect
 	github.com/rcrowley/go-metrics v0.0.0-20200313005456-10cdbea86bc0 // indirect

@@ -5,6 +5,7 @@ import (
 	_ "github.com/moonrailgun/PUBGo/server/config/db"
 	_ "github.com/moonrailgun/PUBGo/server/config/db/migration"
 	"github.com/moonrailgun/PUBGo/server/routes"
+	_ "github.com/moonrailgun/PUBGo/server/utils"
 )
 
 func main() {

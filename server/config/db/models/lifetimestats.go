@@ -1,16 +1,17 @@
 package models
 
 import (
-	"github.com/jinzhu/gorm"
 	"github.com/moonrailgun/PUBGo/server/config/db"
 	"github.com/moonrailgun/PUBGo/server/config/pubg"
 	"github.com/moonrailgun/PUBGo/server/config/pubg/api"
 	"github.com/moonrailgun/PUBGo/server/config/pubg/schema"
 	"github.com/moonrailgun/PUBGo/server/utils"
+	"time"
 )
 
 type ModelLifeTimeStats struct {
-	gorm.Model
+	ID              uint `json:"id" gorm:"primary_key"`
+	UpdatedAt       time.Time
 	AccountId       string
 	GameModeStats   string `gorm:"type:blob"`
 	MatchesSolo     string `gorm:"type:blob"`

@@ -5,7 +5,7 @@ import (
 )
 
 type ModelPubgRequestLog struct {
-	ID        uint `gorm:"primary_key"`
+	ID        uint `json:"id" gorm:"primary_key"`
 	Url       string
 	Body      string
 	Resp      string `gorm:"type:blob"`
