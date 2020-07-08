@@ -1,15 +1,16 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Select, MenuItem, Input } from '@material-ui/core';
-import { fetchPlayerInfo } from '../helper/player';
 import type { PubgShard } from '../types/pubg';
-import { useAsyncFn } from 'react-use';
+import { useAsyncFn, useLocalStorage } from 'react-use';
+import { fetchLifeTimeStats } from '../helper/stats';
+import { LifeTimeStatsPanel } from '../components/LifeTimeStatsPanel';
 
 export const MainRoute: React.FC = React.memo(() => {
   const [shard, setShard] = useState<PubgShard>('steam');
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useLocalStorage('queryUsername', '');
 
   const [state, fetch] = useAsyncFn(() => {
-    return fetchPlayerInfo(shard, username);
+    return fetchLifeTimeStats(shard, username);
   }, [shard, username]);
 
   return (
@@ -36,7 +37,7 @@ export const MainRoute: React.FC = React.memo(() => {
         发送请求
       </Button>
 
-      <div>{JSON.stringify(state.value)}</div>
+      {state.value && <LifeTimeStatsPanel stats={state.value} />}
     </div>
   );
 });

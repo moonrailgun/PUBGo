@@ -19,11 +19,11 @@ type LifeTimeStats struct {
 
 type GameModeStats struct {
 	Duo      *GameModeStatsData `jsonapi:"attr,duo"`
-	DuoFpp   *GameModeStatsData `jsonapi:"attr,duo-fpp"`
+	DuoFPP   *GameModeStatsData `jsonapi:"attr,duo-fpp"`
 	Solo     *GameModeStatsData `jsonapi:"attr,solo"`
-	SoloFpp  *GameModeStatsData `jsonapi:"attr,solo-fpp"`
+	SoloFPP  *GameModeStatsData `jsonapi:"attr,solo-fpp"`
 	Squad    *GameModeStatsData `jsonapi:"attr,squad"`
-	SquadFpp *GameModeStatsData `jsonapi:"attr,squad-fpp"`
+	SquadFPP *GameModeStatsData `jsonapi:"attr,squad-fpp"`
 }
 
 type GameModeStatsData struct {

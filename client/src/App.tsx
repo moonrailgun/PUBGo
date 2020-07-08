@@ -12,14 +12,14 @@ Provider.displayName = 'Provider';
 
 export const App: React.FC = React.memo(() => {
   return (
-    <div>
+    <Provider>
       {/* 基本CSS */}
       <CssBaseline />
 
       <NavBar />
 
       <MainRoute />
-    </div>
+    </Provider>
   );
 });
 App.displayName = 'App';
