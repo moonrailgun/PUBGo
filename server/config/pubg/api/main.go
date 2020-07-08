@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"compress/gzip"
 	"fmt"
+	"github.com/moonrailgun/PUBGo/server/config/db"
 	"io"
 	"net/http"
 
@@ -78,6 +79,10 @@ func httpRequest(url, key string) (*bytes.Buffer, error) {
 
 	var buffer bytes.Buffer
 	buffer.ReadFrom(reader)
+
+	// 增加记录
+	// 注意此处为了不引入数据库模型(会循环引用) 使用了raw sql
+	db.GetDb().Exec(`INSERT INTO model_pubg_request_log(url, resp, created_at) VALUES (?, ?, now())`, url, buffer.String())
 
 	return &buffer, nil
 }

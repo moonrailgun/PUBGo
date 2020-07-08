@@ -19,7 +19,10 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
+
 	db.SingularTable(true)
+	db.BlockGlobalUpdate(true)
+
 	if os.Getenv("DEBUG") != "" {
 		db.LogMode(true)
 	}
