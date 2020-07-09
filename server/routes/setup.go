@@ -27,6 +27,7 @@ func SetupRouter() *gin.Engine {
 
 	stats := new(controllers.StatsController)
 	r.GET("/stats/shard/:shard/name/:username", stats.GetLifeTimeStats)
+	r.GET("/stats/shard/:shard/name/:username/renew", stats.GetLifeTimeStatsRenew)
 
 	return r
 }

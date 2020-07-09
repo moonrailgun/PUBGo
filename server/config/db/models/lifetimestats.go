@@ -33,9 +33,17 @@ func (m *ModelLifeTimeStats) ParseFromPUBG(data schema.LifeTimeStats) {
 	m.MatchesSquadFPP = utils.QuickMarshal(data.MatchesSquadFPP)
 }
 
-func (m *ModelLifeTimeStats) GetInfoByAccountId(shard api.ShardType, accountId string) error {
+func (m *ModelLifeTimeStats) GetInfoByAccountId(shard api.ShardType, accountId string, renew bool) error {
 	// 如果上次数据库更新时间在5分钟内 则直接返回数据库中的数据
-	err := db.GetDb().Where("account_id = ? and TIME_TO_SEC(TIMEDIFF(now(), updated_at)) < 60 * 5", accountId).First(m).Error
+
+	query := "account_id = ?"
+	if renew == true {
+		// 如果需要刷新的话则增加条件
+		// 当不满足条件的话就直接重新获取
+		// 满足条件的话renew不会生效
+		query += " and TIME_TO_SEC(TIMEDIFF(now(), updated_at)) < 60 * 5"
+	}
+	err := db.GetDb().Where(query, accountId).First(m).Error
 	if err != nil {
 		// 	如果数据库中没有数据的话 发送请求
 		remoteStats, err := pubg.Api.RequestLifeTimeStats(shard, accountId)
@@ -52,7 +60,7 @@ func (m *ModelLifeTimeStats) GetInfoByAccountId(shard api.ShardType, accountId s
 	return nil
 }
 
-func (m *ModelLifeTimeStats) GetInfoByUserName(shard api.ShardType, username string) error {
+func (m *ModelLifeTimeStats) GetInfoByUserName(shard api.ShardType, username string, renew bool) error {
 	player := new(ModelPlayer)
 	var err error
 	err = player.GetInfoByUserName(shard, username)
@@ -60,7 +68,7 @@ func (m *ModelLifeTimeStats) GetInfoByUserName(shard api.ShardType, username str
 		return err
 	}
 
-	err = m.GetInfoByAccountId(shard, player.AccountId)
+	err = m.GetInfoByAccountId(shard, player.AccountId, renew)
 	if err != nil {
 		return err
 	}

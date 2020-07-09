@@ -24,11 +24,19 @@ export interface LifeTimeStats {
   matchesSquadFPP: MatchSample[] | null;
 }
 
+/**
+ * 获取生存时间统计
+ */
 export async function fetchLifeTimeStats(
   shard: PubgShard,
-  username: string
+  username: string,
+  renew: boolean = false
 ): Promise<LifeTimeStats> {
-  const { data } = await request.get(`/stats/shard/${shard}/name/${username}`);
+  let url = `/stats/shard/${shard}/name/${username}`;
+  if (renew === true) {
+    url += '/renew';
+  }
+  const { data } = await request.get(url);
 
   return {
     ...data,
