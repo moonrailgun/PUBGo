@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-type ModelLifeTimeStats struct {
+type LifeTimeStats struct {
 	ID              uint `json:"id" gorm:"primary_key"`
 	UpdatedAt       time.Time
 	AccountId       string
@@ -22,7 +22,7 @@ type ModelLifeTimeStats struct {
 	MatchesSquadFPP string `gorm:"type:blob"`
 }
 
-func (m *ModelLifeTimeStats) ParseFromPUBG(data schema.LifeTimeStats) {
+func (m *LifeTimeStats) ParseFromPUBG(data schema.LifeTimeStats) {
 	m.AccountId = data.Player.ID
 	m.GameModeStats = utils.QuickMarshal(data.GameModeStats)
 	m.MatchesSolo = utils.QuickMarshal(data.MatchesSolo)
@@ -33,7 +33,7 @@ func (m *ModelLifeTimeStats) ParseFromPUBG(data schema.LifeTimeStats) {
 	m.MatchesSquadFPP = utils.QuickMarshal(data.MatchesSquadFPP)
 }
 
-func (m *ModelLifeTimeStats) GetInfoByAccountId(shard api.ShardType, accountId string, renew bool) error {
+func (m *LifeTimeStats) GetInfoByAccountId(shard api.ShardType, accountId string, renew bool) error {
 	// 如果上次数据库更新时间在5分钟内 则直接返回数据库中的数据
 
 	query := "account_id = ?"
@@ -53,15 +53,15 @@ func (m *ModelLifeTimeStats) GetInfoByAccountId(shard api.ShardType, accountId s
 
 		m.ParseFromPUBG(*remoteStats)
 
-		db.GetDb().Where("account_id = ?", m.AccountId).Delete(&ModelLifeTimeStats{})
+		db.GetDb().Where("account_id = ?", m.AccountId).Delete(&LifeTimeStats{})
 		db.GetDb().Create(m)
 	}
 
 	return nil
 }
 
-func (m *ModelLifeTimeStats) GetInfoByUserName(shard api.ShardType, username string, renew bool) error {
-	player := new(ModelPlayer)
+func (m *LifeTimeStats) GetInfoByUserName(shard api.ShardType, username string, renew bool) error {
+	player := new(Player)
 	var err error
 	err = player.GetInfoByUserName(shard, username)
 	if err != nil {

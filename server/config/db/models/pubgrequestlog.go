@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-type ModelPubgRequestLog struct {
+type PubgRequestLog struct {
 	ID        uint `json:"id" gorm:"primary_key"`
 	Url       string
 	Body      string

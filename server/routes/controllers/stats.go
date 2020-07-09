@@ -12,7 +12,7 @@ func (ctl StatsController) GetLifeTimeStats(c *gin.Context) {
 	shard := c.Param("shard")
 	username := c.Param("username")
 
-	stats := new(models.ModelLifeTimeStats)
+	stats := new(models.LifeTimeStats)
 	err := stats.GetInfoByUserName(api.ShardType(shard), username, false)
 	if err != nil {
 		c.JSON(500, gin.H{"msg": err})
@@ -25,7 +25,7 @@ func (ctl StatsController) GetLifeTimeStatsRenew(c *gin.Context) {
 	shard := c.Param("shard")
 	username := c.Param("username")
 
-	stats := new(models.ModelLifeTimeStats)
+	stats := new(models.LifeTimeStats)
 	err := stats.GetInfoByUserName(api.ShardType(shard), username, true)
 	if err != nil {
 		c.JSON(500, gin.H{"msg": err})

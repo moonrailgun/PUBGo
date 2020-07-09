@@ -13,7 +13,7 @@ func (ctl MatchController) GetMatchInfo(c *gin.Context) {
 	matchId := c.Param("matchId")
 
 	// 优先从数据库中查找
-	var match models.ModelMatch
+	var match models.Match
 	err := match.GetMatchInfo(api.ShardType(shard), matchId)
 	if err != nil {
 		c.JSON(500, gin.H{"msg": err})

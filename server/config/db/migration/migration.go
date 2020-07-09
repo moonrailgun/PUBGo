@@ -8,7 +8,7 @@ import (
 
 // 执行迁移
 func RunMigrate(db *gorm.DB) {
-	db.AutoMigrate(&models.ModelPlayer{}, &models.ModelMatch{}, &models.ModelLifeTimeStats{}, &models.ModelPubgRequestLog{})
+	db.AutoMigrate(&models.Player{}, &models.Match{}, &models.LifeTimeStats{}, &models.PubgRequestLog{})
 }
 
 func init() {

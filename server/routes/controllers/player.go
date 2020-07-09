@@ -22,7 +22,7 @@ func (ctl PlayerController) GetPlayerInfo(c *gin.Context) {
 	}
 
 	// 将账号信息存储到数据库
-	var player models.ModelPlayer
+	var player models.Player
 	player.ParseFromPUBG(*remotePlayer)
 	db.GetDb().Where("account_id = ?", remotePlayer.ID).FirstOrCreate(&player)
 

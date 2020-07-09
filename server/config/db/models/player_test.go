@@ -10,7 +10,7 @@ import (
 func TestPlayerGetInfoByUserName(t *testing.T) {
 	testPlayerName := "WackyJacky101"
 
-	player := new(ModelPlayer)
+	player := new(Player)
 	err := player.GetInfoByUserName(api.STEAM, testPlayerName)
 	if err != nil {
 		panic(err)
@@ -22,7 +22,7 @@ func TestPlayerGetInfoByUserName(t *testing.T) {
 	assert.Equal(t, "steam", player.ShardId)
 
 	// 检查是否已经写入数据库
-	dbPlayer := new(ModelPlayer)
+	dbPlayer := new(Player)
 	db.GetDb().Where("id = ?", player.ID).First(dbPlayer)
 	assert.Equal(t, testPlayerName, dbPlayer.Name)
 }

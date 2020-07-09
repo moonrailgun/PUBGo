@@ -9,7 +9,7 @@ import (
 func TestGetMatchInfo(t *testing.T) {
 	testMatchId := "186f4ee7-235c-4778-b581-8114821b8e05"
 
-	match := new(ModelMatch)
+	match := new(Match)
 	err := match.GetMatchInfo("steam", testMatchId)
 	if err != nil {
 		panic(err)
@@ -21,7 +21,7 @@ func TestGetMatchInfo(t *testing.T) {
 	assert.Greater(t, match.ID, uint(0))
 
 	// 检查是否已经写入数据库
-	dbMatch := new(ModelMatch)
+	dbMatch := new(Match)
 	db.GetDb().Where("id = ?", match.ID).First(dbMatch)
 	assert.Equal(t, testMatchId, dbMatch.MatchId)
 }

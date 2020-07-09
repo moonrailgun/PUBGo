@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-type ModelMatch struct {
+type Match struct {
 	BaseModel
 	MatchId        string `gorm:"not null;unique_index"`
 	Duration       int
@@ -17,7 +17,7 @@ type ModelMatch struct {
 	Roster         string `gorm:"type:blob"`
 }
 
-func (m *ModelMatch) ParseFromPUBG(data schema.Match) {
+func (m *Match) ParseFromPUBG(data schema.Match) {
 	m.MatchId = data.ID
 	m.Duration = data.Duration
 	m.MatchCreatedAt = data.CreatedAt
@@ -27,7 +27,7 @@ func (m *ModelMatch) ParseFromPUBG(data schema.Match) {
 
 // 获取比赛详情
 // 并进行数据库缓存
-func (m *ModelMatch) GetMatchInfo(shard api.ShardType, matchId string) error {
+func (m *Match) GetMatchInfo(shard api.ShardType, matchId string) error {
 	err := db.GetDb().Where("match_id = ?", matchId).First(m).Error
 	if err != nil {
 		// 如果没有取到数据的话

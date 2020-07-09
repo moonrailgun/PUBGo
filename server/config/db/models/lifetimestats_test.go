@@ -10,7 +10,7 @@ import (
 func TestLifeTimeStatsGetInfoByUserName(t *testing.T) {
 	testPlayerName := "WackyJacky101"
 
-	stats := new(ModelLifeTimeStats)
+	stats := new(LifeTimeStats)
 	err := stats.GetInfoByUserName(api.STEAM, testPlayerName)
 	if err != nil {
 		panic(err)
