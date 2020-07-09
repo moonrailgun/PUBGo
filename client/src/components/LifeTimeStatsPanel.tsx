@@ -10,14 +10,20 @@ import {
   Switch,
 } from '@material-ui/core';
 import { TabPanel } from './TabPanel';
-import { StatsItem } from './StatsItem';
+import { StatsInfo } from './StatsInfo';
+import { useLocalStorage } from 'react-use';
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    backgroundColor: theme.palette.background.paper,
+  },
+  updatedTime: {
+    alignSelf: 'center',
+  },
   tabsContainer: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
     display: 'flex',
-    height: 224,
   },
   tabs: {
     borderRight: `1px solid ${theme.palette.divider}`,
@@ -29,26 +35,32 @@ interface Props {
 }
 export const LifeTimeStatsPanel: React.FC<Props> = React.memo((props) => {
   const { stats } = props;
-  const [tabId, setTabId] = useState('solo');
-  const [isFpp, setIsFpp] = useState(false);
+  const [tabId, setTabId] = useLocalStorage('lifeTimeStatsTab', 'solo');
+  const [isFpp, setIsFpp] = useLocalStorage('isFPP', false);
   const classes = useStyles();
 
   return (
-    <div>
-      <Typography>
-        最后更新时间: {getStandardTimeStr(stats.updatedAt)}
-      </Typography>
-
-      <Grid component="label" container alignItems="center" spacing={1}>
-        <Grid item>TPP</Grid>
-        <Grid item>
-          <Switch
-            checked={isFpp}
-            onChange={(_, checked) => setIsFpp(checked)}
-            name="FPP"
-          />
+    <div className={classes.root}>
+      <Grid container direction="row" justify="space-between">
+        <Grid item className={classes.updatedTime}>
+          <Typography>
+            最后更新时间: {getStandardTimeStr(stats.updatedAt)}
+          </Typography>
         </Grid>
-        <Grid item>FPP</Grid>
+
+        <Grid item>
+          <Grid container alignItems="center" spacing={1}>
+            <Grid item>TPP</Grid>
+            <Grid item>
+              <Switch
+                checked={isFpp}
+                onChange={(_, checked) => setIsFpp(checked)}
+                name="FPP"
+              />
+            </Grid>
+            <Grid item>FPP</Grid>
+          </Grid>
+        </Grid>
       </Grid>
 
       <div className={classes.tabsContainer}>
@@ -65,19 +77,19 @@ export const LifeTimeStatsPanel: React.FC<Props> = React.memo((props) => {
         </Tabs>
 
         <TabPanel tabId={tabId} value="solo">
-          <StatsItem
+          <StatsInfo
             data={
               isFpp ? stats.gameModeStats.soloFPP : stats.gameModeStats.solo
             }
           />
         </TabPanel>
         <TabPanel tabId={tabId} value="duo">
-          <StatsItem
+          <StatsInfo
             data={isFpp ? stats.gameModeStats.duoFPP : stats.gameModeStats.duo}
           />
         </TabPanel>
         <TabPanel tabId={tabId} value="squad">
-          <StatsItem
+          <StatsInfo
             data={
               isFpp ? stats.gameModeStats.squadFPP : stats.gameModeStats.squad
             }

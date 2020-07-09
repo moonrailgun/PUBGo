@@ -11,7 +11,7 @@ export interface GameStats {
   dBNOs: number;
   dailyKills: number;
   damageDealt: number;
-  days: number;
+  days: number; // 游戏局数
   dailyWins: number;
   headshotKills: number; // 爆头击杀数
   heals: number;

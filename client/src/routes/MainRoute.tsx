@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Button, Select, MenuItem, Input } from '@material-ui/core';
+import { Button, Select, MenuItem, Input, Container } from '@material-ui/core';
 import type { PubgShard } from '../types/pubg';
 import { useAsyncFn, useLocalStorage } from 'react-use';
 import { fetchLifeTimeStats } from '../helper/stats';
@@ -40,7 +40,7 @@ export const MainRoute: React.FC = React.memo(() => {
   }, [state.value?.updatedAt]);
 
   return (
-    <div>
+    <Container fixed>
       <div>Hello World</div>
       <Select
         value={shard}
@@ -64,7 +64,7 @@ export const MainRoute: React.FC = React.memo(() => {
       </Button>
 
       {state.value && <LifeTimeStatsPanel stats={state.value} />}
-    </div>
+    </Container>
   );
 });
 MainRoute.displayName = 'MainRoute';
