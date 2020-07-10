@@ -15,6 +15,7 @@ type Match struct {
 	Duration       int
 	MatchCreatedAt time.Time
 	Roster         string `gorm:"type:blob"`
+	Assets         string `gorm:"type:blob"`
 }
 
 func (m *Match) ParseFromPUBG(data schema.Match) {
@@ -23,6 +24,7 @@ func (m *Match) ParseFromPUBG(data schema.Match) {
 	m.MatchCreatedAt = data.CreatedAt
 
 	m.Roster = utils.QuickMarshal(data.Rosters)
+	m.Assets = utils.QuickMarshal(data.Assets)
 }
 
 // 获取比赛详情

@@ -1522,4 +1522,5 @@ func TestParseMatch(t *testing.T) {
 	assert.Equal(t, "e4ad0cc5-d9e3-4b7b-86b0-b9ef360df8c4", match.Rosters[0].ID)
 	assert.Equal(t, "false", match.Rosters[0].Won)
 	assert.Len(t, match.Rosters, 9)
+	assert.Len(t, match.Assets, 1)
 }

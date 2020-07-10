@@ -21,6 +21,15 @@ type Match struct {
 	ShardId      string    `jsonapi:"attr,shardId"`
 	TitleId      string    `jsonapi:"attr,titleId"`
 	Rosters      []*Roster `jsonapi:"relation,rosters"`
+	Assets       []*Asset  `jsonapi:"relation,assets"`
+}
+
+type Asset struct {
+	ID          string    `jsonapi:"primary,asset" json:"id"`
+	Url         string    `jsonapi:"attr,URL"`
+	Name        string    `jsonapi:"attr,name"`
+	Description string    `jsonapi:"attr,description"`
+	CreatedAt   time.Time `jsonapi:"attr,createdAt,iso8601"`
 }
 
 type Roster struct {

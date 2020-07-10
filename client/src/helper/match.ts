@@ -7,6 +7,7 @@ export interface MatchDetail {
   matchCreatedAt: string;
   duration: number;
   roster: MatchRoster[];
+  assets: MatchAssets[];
 }
 
 interface MatchRoster {
@@ -26,6 +27,14 @@ interface MatchParticipant {
   shardId: string;
 }
 
+interface MatchAssets {
+  id: string; // random uuid
+  url: string;
+  name: string; //telemetry
+  description: string;
+  createdAt: string;
+}
+
 /**
  * 获取战局信息
  */
@@ -35,6 +44,7 @@ export async function fetchMatchDetail(
 ): Promise<MatchDetail> {
   const { data } = await request.get(`/match/shard/${shard}/match/${matchId}`);
   data.roster = quickParse(data.roster);
+  data.assets = quickParse(data.assets);
 
   return data;
 }
