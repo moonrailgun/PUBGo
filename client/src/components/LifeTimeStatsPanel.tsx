@@ -12,6 +12,7 @@ import {
 import { TabPanel } from './TabPanel';
 import { StatsInfo } from './StatsInfo';
 import { useLocalStorage } from 'react-use';
+import { MatchList } from './MatchList';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -82,17 +83,24 @@ export const LifeTimeStatsPanel: React.FC<Props> = React.memo((props) => {
               isFpp ? stats.gameModeStats.soloFPP : stats.gameModeStats.solo
             }
           />
+          <MatchList
+            matches={isFpp ? stats.matchesSoloFPP : stats.matchesSolo}
+          />
         </TabPanel>
         <TabPanel tabId={tabId} value="duo">
           <StatsInfo
             data={isFpp ? stats.gameModeStats.duoFPP : stats.gameModeStats.duo}
           />
+          <MatchList matches={isFpp ? stats.matchesDuoFPP : stats.matchesDuo} />
         </TabPanel>
         <TabPanel tabId={tabId} value="squad">
           <StatsInfo
             data={
               isFpp ? stats.gameModeStats.squadFPP : stats.gameModeStats.squad
             }
+          />
+          <MatchList
+            matches={isFpp ? stats.matchesSquadFPP : stats.matchesSquad}
           />
         </TabPanel>
       </div>

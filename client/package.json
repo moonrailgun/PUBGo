@@ -14,12 +14,14 @@
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "axios": "^0.19.2",
+    "lodash": "^4.17.19",
     "moment": "^2.27.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-use": "^15.3.2"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.157",
     "@types/react-dom": "^16.9.8",
     "express": "^4.17.1",
     "http-proxy-middleware": "^1.0.4",
