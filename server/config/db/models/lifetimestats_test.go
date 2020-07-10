@@ -11,7 +11,7 @@ func TestLifeTimeStatsGetInfoByUserName(t *testing.T) {
 	testPlayerName := "WackyJacky101"
 
 	stats := new(LifeTimeStats)
-	err := stats.GetInfoByUserName(api.STEAM, testPlayerName)
+	err := stats.GetInfoByUserName(api.STEAM, testPlayerName, false)
 	if err != nil {
 		panic(err)
 	}
