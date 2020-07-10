@@ -13,6 +13,10 @@ type Match struct {
 	BaseModel
 	MatchId        string `gorm:"not null;unique_index"`
 	Duration       int
+	MatchType      string // arcade, custom, event, official, training
+	MapName        string // Baltic_Main, Desert_Main, DihorOtok_Main, Erangel_Main, Range_Main, Savage_Main, Summerland_Main
+	IsCustomMatch  bool
+	SeasonState    string // closed, prepare, progress
 	MatchCreatedAt time.Time
 	Roster         string `gorm:"type:blob"`
 	Assets         string `gorm:"type:blob"`
@@ -21,6 +25,10 @@ type Match struct {
 func (m *Match) ParseFromPUBG(data schema.Match) {
 	m.MatchId = data.ID
 	m.Duration = data.Duration
+	m.MatchType = data.MatchType
+	m.MapName = data.MapName
+	m.IsCustomMatch = data.IsCustomMatch
+	m.SeasonState = data.SeasonState
 	m.MatchCreatedAt = data.CreatedAt
 
 	m.Roster = utils.QuickMarshal(data.Rosters)

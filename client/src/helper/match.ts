@@ -6,6 +6,17 @@ export interface MatchDetail {
   matchId: string;
   matchCreatedAt: string;
   duration: number;
+  matchType: 'arcade' | 'custom' | 'event' | 'official' | 'training';
+  mapName:
+    | 'Baltic_Main'
+    | 'Desert_Main'
+    | 'DihorOtok_Main'
+    | 'Erangel_Main'
+    | 'Range_Main'
+    | 'Savage_Main'
+    | 'Summerland_Main';
+  isCustomMatch: boolean;
+  seasonState: 'closed' | 'prepare' | 'progress';
   roster: MatchRoster[];
   assets: MatchAssets[];
 }

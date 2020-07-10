@@ -13,15 +13,19 @@ type MatchSummary struct {
 }
 
 type Match struct {
-	ID           string    `jsonapi:"primary,match" json:"id"`
-	CreatedAt    time.Time `jsonapi:"attr,createdAt,iso8601"`
-	Duration     int       `jsonapi:"attr,duration"`
-	GameMode     string    `jsonapi:"attr,gameMode"`
-	PatchVersion string    `jsonapi:"attr,patchVersion"`
-	ShardId      string    `jsonapi:"attr,shardId"`
-	TitleId      string    `jsonapi:"attr,titleId"`
-	Rosters      []*Roster `jsonapi:"relation,rosters"`
-	Assets       []*Asset  `jsonapi:"relation,assets"`
+	ID            string    `jsonapi:"primary,match" json:"id"`
+	CreatedAt     time.Time `jsonapi:"attr,createdAt,iso8601"`
+	Duration      int       `jsonapi:"attr,duration"`
+	GameMode      string    `jsonapi:"attr,gameMode"`
+	MatchType     string    `jsonapi:"attr,matchType"` // arcade, custom, event, official, training
+	MapName       string    `jsonapi:"attr,mapName"`   // Baltic_Main, Desert_Main, DihorOtok_Main, Erangel_Main, Range_Main, Savage_Main, Summerland_Main
+	IsCustomMatch bool      `jsonapi:"attr,isCustomMatch"`
+	PatchVersion  string    `jsonapi:"attr,patchVersion"`
+	SeasonState   string    `jsonapi:"attr,seasonState"` // closed, prepare, progress
+	ShardId       string    `jsonapi:"attr,shardId"`
+	TitleId       string    `jsonapi:"attr,titleId"`
+	Rosters       []*Roster `jsonapi:"relation,rosters"`
+	Assets        []*Asset  `jsonapi:"relation,assets"`
 }
 
 type Asset struct {
